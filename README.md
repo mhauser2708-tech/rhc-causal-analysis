@@ -13,10 +13,12 @@ Observational causal analysis of the effect of right heart catheterization (RHC)
 
 | | |
 |---|---|
-| **Context** | University of Southern Denmark (SDU), DSK823 Causal Analysis in Business Data Science · {{Solo / Group of N}} |
+| **Context** | University of Southern Denmark (SDU), DSK823 Causal Analysis in Business Data Science |
 | **Period** | Jun 2026 |
 | **Data** | [RHC dataset](https://hbiostat.org/data/repo/rhc.html), 5,735 patients (2,184 treated, 3,551 control), 44 pre-treatment covariates |
 | **Tech** | R, tidyverse, fixest, causalweight, DoubleML + mlr3 (ranger), grf |
+
+📖 **[Full methodology, balance table, assumptions and limitations → documentation.md](documentation.md)**
 
 ## Results at a glance
 
@@ -29,8 +31,8 @@ Every method finds that RHC is associated with *higher* mortality, but the size 
 
 | Method | ATE | 95% CI |
 |---|---|---|
-| OLS, no controls | +0.051 | n/a (robust SE 0.013) |
-| OLS, 44 covariates | +0.051 | n/a (robust SE 0.013) |
+| OLS, no controls | +0.051 | [0.026, 0.076] |
+| OLS, 44 covariates | +0.051 | [0.025, 0.077] |
 | IPW (5% trimming) | +0.062 | [0.028, 0.095] |
 | **AIPW Double ML** | **+0.028** | **[0.013, 0.042]** |
 
@@ -56,6 +58,7 @@ flowchart TD
 ```text
 rhc-causal-analysis/
 ├── rhc_causal_analysis.R    # full analysis: data prep, balance, OLS, IPW, AIPW, causal forest
+├── documentation.md         # methodology, assumptions, full results and limitations
 ├── data/
 │   └── rhc.csv              # SUPPORT / RHC dataset (hbiostat.org)
 ├── figures/                 # propensity scores, balance, CATE, effect estimates
